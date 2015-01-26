@@ -1,0 +1,2 @@
+# SpottyBot
+Spotify Twitch Bot
