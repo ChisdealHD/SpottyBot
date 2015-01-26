@@ -1,0 +1,14 @@
+{
+  "name": "spottybot",
+  "version": "1.0.0",
+  "description": "A bot to allow user control of Spotify from a Twitch chat room.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Fasani",
+  "license": "ISC",
+  "dependencies": {
+    "twitch-irc": "^1.1.0"
+  }
+}
