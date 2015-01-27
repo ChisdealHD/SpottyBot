@@ -9,6 +9,7 @@
   "author": "Michael Fasani",
   "license": "ISC",
   "dependencies": {
+    "node-spotify-webhelper": "0.0.3",
     "twitch-irc": "^1.1.0"
   }
 }
