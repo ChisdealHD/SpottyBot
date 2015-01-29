@@ -5,6 +5,9 @@ var nodeSpotifyWebHelper = require('node-spotify-webhelper');
 
 var spotify = new nodeSpotifyWebHelper.SpotifyWebHelper();
 
+
+var _skipCount = 0;
+
 // Calling a new client..
 var client = new irc.client({
     options: {
@@ -22,6 +25,13 @@ var client = new irc.client({
 
 // Connect the client to server..
 client.connect();
+
+
+// client.addListener('join', function (channel, user, message) {
+//     if (user.special.indexOf('mod') >= 0) {
+//         client.say(channel, "Hello " + user.username + '!');
+//     }
+// });
 
 // Your events..
 client.addListener('chat', function (channel, user, message) {
@@ -55,9 +65,18 @@ client.addListener('chat', function (channel, user, message) {
     //         }
     //     });
 
-    // }
+    // }a
 
+    
+
+    if (message.indexOf('!skip') === 0) {
+
+        skip(channel, user, message);
+
+    }
+ 
     });
+
 
 function whatSong(channel, user, message) {
     spotify.getStatus(function (err, res) {
@@ -68,4 +87,17 @@ function whatSong(channel, user, message) {
       var message = 'Currently playing: ' + res.track.artist_resource.name + ' - ' + res.track.track_resource.name + ' (' + res.track.track_resource.location.og + ')';
       client.say(channel, message);
     });
+}
+
+function skip(channel, user, message) {
+
+  if (_skipCount === 5) {
+    client.say(channel, "Track Skipped!");
+    _skipCount = 0
+  } else {
+    _skipCount = _skipCount + 1;
+    var message = _skipCount + " / 5 votes needed to skip this track!";
+    client.say(channel, message);
+  }
+
 }
