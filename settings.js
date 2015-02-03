@@ -1,6 +1,6 @@
 module.exports = {
-  botUsername: 'SpottyBot',
-  botAuthToken: 'oauth:y13g9wu7jilquha4489dtde0fxvuyv',
-  twitchChannels: ['fivemandown'],
+  botUsername: '',
+  botAuthToken: 'oauth:123456789',
+  twitchChannels: [''],
   skipCount: 5
 };
