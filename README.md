@@ -1,5 +1,4 @@
-![twitch](http://s.jtvnw.net/jtv_user_pictures/hosted_images/Twitch_BlackLogo.png)
-![spotify](https://spotifypresscom.files.wordpress.com/2013/01/spotify-logo-primary-horizontal-light-background-rgb.jpg)
+![SpottyBot](http://i.imgur.com/0ZJJA0Q.gif)
 
 # SpottyBot
 
