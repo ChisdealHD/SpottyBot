@@ -41,8 +41,8 @@ module.exports = {
 ```
 
 ## Start the app playing music!
-Type !start in  Twitch chat room.
-This can also be used to skip a track with out votes!
+Type !start in  Twitch chat room.  
+This can also be used to skip a track with out votes!  
 This is a Broadcaster only command.
 
 ## Chat client commands
