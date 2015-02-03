@@ -16,12 +16,12 @@ The current app list is over 500 songs! [Twitch Music](http://music.twitch.tv)
 
 You will need a few things before you start:
 
-You need to have a Spotify account. [Create Spotify Account](https://www.spotify.com/signup/)
-You need to launch Spotify on your streaming desktop or laptop computer. [Install Spotify](https://www.spotify.com/download/)
-You may need  a premium Spotify account for this to work (I have not tested yet).
-You need to have node.js installed. [Install Node](http://nodejs.org/)
-Download this SpottyBot application. [Download SpottyBot](https://github.com/Fasani/SpottyBot/archive/master.zip)
-You need a spare or new twitch bot account.
+You need to have a Spotify account. [Create Spotify Account](https://www.spotify.com/signup/)  
+You need to launch Spotify on your streaming desktop or laptop computer. [Install Spotify](https://www.spotify.com/download/)  
+You may need  a premium Spotify account for this to work (I have not tested yet).  
+You need to have node.js installed. [Install Node](http://nodejs.org/)  
+Download this SpottyBot application. [Download SpottyBot](https://github.com/Fasani/SpottyBot/archive/master.zip)  
+You need a spare or new twitch bot account.  
 
 # Start SpottyBot
 
