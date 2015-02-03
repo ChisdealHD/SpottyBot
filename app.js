@@ -39,6 +39,11 @@ client.addListener('chat', function (channel, user, message) {
     skip(channel, user, message);
   }
 
+  if (message.indexOf('!keep') === 0) {
+    // Skip track
+    keep(channel, user, message);
+  }
+
 });
 
 function whatSong(channel, user, message) {
@@ -105,8 +110,21 @@ function skip(channel, user, message) {
 
   } else {
     _skipCount = _skipCount + 1;
-    var message = _skipCount + " / 5 votes needed to skip this track!";
+    var message = user.username + " is voting to skip this track! " + _skipCount + " / 5 votes needed to skip this track!";
     client.say(channel, message);
   }
+
+}
+
+function keep(channel, user, message) {
+
+    _skipCount = _skipCount - 1;
+
+    if (_skipCount === -1) {
+      _skipCount = 0;
+    }
+
+    var message = user.username + " is voting to keep this track! Skip votes is now " + _skipCount + " / 5 booya!";
+    client.say(channel, message);
 
 }
