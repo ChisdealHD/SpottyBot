@@ -57,9 +57,8 @@ client.addListener('chat', function (channel, user, message) {
   if (message.indexOf('!start') === 0 && user.special.indexOf('broadcaster') >= 0) {
     var newTrack = getTrack();
     play(newTrack);
+    console.info("Spotify started!");
   }
-
-});
 
 });
 
