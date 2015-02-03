@@ -1,14 +1,24 @@
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
+//Libs
 var irc = require('twitch-irc');
 var nodeSpotifyWebHelper = require('node-spotify-webhelper');
-var tracks = require('./tracks');
-
 var spotify = new nodeSpotifyWebHelper.SpotifyWebHelper();
 
+//External Files
+var tracks = require('./tracks');
+var settings = require('./settings');
+
+//Global Vars
 var _skipCount = 0;
 var _myNextTrackTimer = 0;
-// Calling a new client..
+var _myTracks = tracks.allTracks();
+var _myUsername = settings.botUsername;
+var _myPassword = settings.botAuthToken;
+var _myTwitchChannel = settings.twitchChannels;
+var _mySkipCount = settings.skipCount;
+
+// Creating NEW Twitch IRC Client
 var client = new irc.client({
   options: {
     debug: true,
@@ -17,16 +27,16 @@ var client = new irc.client({
     tc: 3
   },
   identity: {
-    username: 'SpottyBot',
-    password: 'oauth:y13g9wu7jilquha4489dtde0fxvuyv'
+    username: _myUsername,
+    password: _myPassword
   },
-  channels: ['fivemandown']
+  channels: _myTwitchChannel
 });
 
-// Connect the client to server..
+//Connect to Twitch
 client.connect();
 
-// Your events..
+// Add listeners for chat commands.
 client.addListener('chat', function (channel, user, message) {
 
   if (message.indexOf('!song') === 0) {
@@ -58,10 +68,8 @@ function whatSong(channel, user, message) {
 }
 
 function getTrack() {
-  var myTracks = tracks.allTracks();
-  var trackNumber = Math.floor(Math.random() * myTracks.length + 1);
-
-  return myTracks[trackNumber].uri;
+  var trackNumber = Math.floor(Math.random() * _myTracks.length + 1);
+  return _myTracks[trackNumber].uri;
 }
 
 function play(track) {
@@ -99,7 +107,7 @@ function skip(channel, user, message) {
   if (_skipCount === 4) {
 
     _skipCount = _skipCount + 1;
-    var message = _skipCount + " / 5 votes needed to skip this track! - Track Skipped!";
+    var message = _skipCount + " / " + _mySkipCount + " votes needed to skip this track! - Track Skipped!";
     client.say(channel, message);
 
     _skipCount = 0
@@ -110,7 +118,7 @@ function skip(channel, user, message) {
 
   } else {
     _skipCount = _skipCount + 1;
-    var message = user.username + " is voting to skip this track! " + _skipCount + " / 5 votes needed to skip this track!";
+    var message = user.username + " is voting to skip this track! " + _skipCount + " / " + _mySkipCount + " votes needed to skip this track!";
     client.say(channel, message);
   }
 
@@ -118,13 +126,13 @@ function skip(channel, user, message) {
 
 function keep(channel, user, message) {
 
-    _skipCount = _skipCount - 1;
+  _skipCount = _skipCount - 1;
 
-    if (_skipCount === -1) {
-      _skipCount = 0;
-    }
+  if (_skipCount === -1) {
+    _skipCount = 0;
+  }
 
-    var message = user.username + " is voting to keep this track! Skip votes is now " + _skipCount + " / 5 booya!";
-    client.say(channel, message);
+  var message = user.username + " is voting to keep this track! Skip votes is now " + _skipCount + " / " + _mySkipCount + " booya!";
+  client.say(channel, message);
 
 }

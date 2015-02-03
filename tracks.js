@@ -511,4 +511,4 @@ var allTracks = [
 {"uri": "spotify:track:7sZbPsVZVp0NnsuQc2GL6Z"},
 {"uri": "spotify:track:7L3QsXEFNrhdxAPh7hFCkU"},
 {"uri": "spotify:track:0e8lU53VmWcw495dHejZoA"},
-{"uri": "spotify:track:2KwBwj1yrWXRYNce1GtTAK"}]
+{"uri": "spotify:track:2KwBwj1yrWXRYNce1GtTAK"}];
