@@ -1,6 +1,6 @@
 ![SpottyBot](http://i.imgur.com/0ZJJA0Q.gif)
 
-# SpottyBot
+## SpottyBot
 
 A Twitch IRC bot which plays only TOS compliment music via your desktop Spotify application! (Windows Only, maybe Mac but I have not tested!)
 
@@ -12,7 +12,7 @@ This small node app allows users in your room to control the music!
 
 The current app list is over 500 songs! [Twitch Music](http://music.twitch.tv)
 
-# Usage
+## Usage
 
 You will need a few things before you start:
 
@@ -23,7 +23,7 @@ You need to have node.js installed. [Install Node](http://nodejs.org/)
 Download this SpottyBot application. [Download SpottyBot](https://github.com/Fasani/SpottyBot/archive/master.zip)  
 You need a spare or new twitch bot account.  
 
-# Start SpottyBot
+## Start SpottyBot
 
 1. You need to create a new twitch account for your SpottyBot, call it something like TimsJukeBox or FMDMusicBot.
 2. You need to get an oauth token for the bot to connect to Twitch. [Create oauth token](http://twitchapps.com/tmi/)
@@ -39,6 +39,14 @@ module.exports = {
   skipCount: 5
 };
 ```
+
+## Start the app playing music!
+Type !skip 5 times. (I need to make command that says !play only for channel owners.)
+
+## Chat client commands
+!song - list the current song playing
+!skip - votes to skip the track
+!keep - votes to keep the track
 
 ## FAQ
 
