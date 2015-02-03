@@ -46,10 +46,10 @@ This command can also be used to skip a track.
 This is a Broadcaster only command.
 
 ## Chat client commands
-!song - list the current song playing  
-!skip - votes to skip the track  
-!keep - votes to keep the track  
-!start - Only broadcaster can use this
+!song - List the current song playing.  
+!skip - Votes to skip the track.  
+!keep - Votes to keep the track.  
+!start - Only the broadcaster can use this. Can be used to skip a track also.
 
 ## FAQ
 
