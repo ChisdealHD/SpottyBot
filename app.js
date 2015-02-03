@@ -54,6 +54,13 @@ client.addListener('chat', function (channel, user, message) {
     keep(channel, user, message);
   }
 
+  if (message.indexOf('!start') === 0 && user.special.indexOf('broadcaster') >= 0) {
+    var newTrack = getTrack();
+    play(newTrack);
+  }
+
+});
+
 });
 
 function whatSong(channel, user, message) {
