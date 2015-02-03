@@ -44,9 +44,9 @@ module.exports = {
 Type !skip 5 times. (I need to make command that says !play only for channel owners.)
 
 ## Chat client commands
-!song - list the current song playing
-!skip - votes to skip the track
-!keep - votes to keep the track
+!song - list the current song playing  
+!skip - votes to skip the track  
+!keep - votes to keep the track  
 
 ## FAQ
 
