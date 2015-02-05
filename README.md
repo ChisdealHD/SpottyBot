@@ -2,7 +2,7 @@
 
 ## SpottyBot
 
-A Twitch IRC bot which plays only TOS compliment music via your desktop Spotify application! (Windows Only, maybe Mac but I have not tested!)
+A Twitch IRC bot which plays only TOS compliment music via your desktop Spotify application! (Works on Windows and Mac).
 
 Yes, users in your Twitch chat room can now control the music playing on your twitch stream and as a streamer you can be sure your not breaking any laws or Twitch terms of service!
 
