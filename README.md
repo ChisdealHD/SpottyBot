@@ -55,5 +55,5 @@ This is a Broadcaster only command.
 
 Coming Soon!
 
-## Known Issues:
+## Known Issues
 If the bot try's to play a music track which is not allowed in the given users country or if an advert plays the bot will crash. The bot can be restarted by typing !start in the Twitch chat. I am working to issolate and fix this issue. <3
