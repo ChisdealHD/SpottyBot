@@ -5,11 +5,11 @@
 A Twitch IRC bot which plays only TOS compliment music via your desktop Spotify application!  
 (Works on Windows and Mac).
 
-Yes, users in your Twitch chat room can now control the music playing on your twitch stream and as a streamer you can be sure your not breaking any laws or Twitch terms of service!
+Users in your Twitch chat room can now control the music playing on your Twitch stream and as a streamer you can be sure your not breaking any laws or the Twitch terms of service!
 
-Recently Twitch announced a list of tracks made available to Twitch broadcasters to use freely in Twitch Live and Recorded Videos.
+Recently Twitch announced a list of tracks made available to Twitch broadcasters to use freely in Twitch live and recorded videos.
 
-This small node app allows users in your room to control the music!
+This small node app allows users in your chat room to control the music via a voting system and discover the currently playing music track!
 
 The current app list is over 500 songs! [Twitch Music](http://music.twitch.tv)
 
