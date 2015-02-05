@@ -13,6 +13,9 @@ This small node app allows users in your chat room to control the music via a vo
 
 The current app list is over 500 songs! [Twitch Music](http://music.twitch.tv)
 
+## Known Issues:
+If the bot try's to play a music track which is not allowed in the given users country or if an advert plays the bot will crash. The bot can be restarted by typing !start in the Twitch chat. I am working to issolate and fix this issue. <3
+
 ## Usage
 
 You will need a few things before you start:
