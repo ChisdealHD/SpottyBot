@@ -76,7 +76,7 @@ function whatSong(channel, user, message) {
 }
 
 function getTrack() {
-  var trackNumber = Math.floor(Math.random() * _myTracks.length + 1);
+  var trackNumber = Math.floor(Math.random() * _myTracks.length);
   return _myTracks[trackNumber].uri;
 }
 
@@ -89,7 +89,6 @@ function play(track) {
   spotify.play(track, function(err, res) {
 
     if (err) {
-      console.info(err);
       return console.error(err);
     }
 
