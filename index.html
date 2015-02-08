@@ -8,16 +8,36 @@
 <body>
 
 <div id="app">
+
   <h1>SpottyBot</h1>
-  <div id="logger">
+
+  <div id="connect">
+    <div class="row">
+      <label for="botUsername">Bot username:</label>
+      <input id="botUsername" type="text" class="textbox" placeholder="e.g. SpottyBot"/>
+    </div>
+    <div class="row">
+      <label for="botAuth">Bot oauth token:</label>
+      <input id="botAuth" type="text" class="textbox" placeholder="e.g. oauth:12345678912345"/>
+    </div>
+    <div class="row">
+      <label for="channel">Your channel:</label>
+      <input id="channel" type="text" class="textbox" placeholder="e.g. fivemandown"/>
+    </div>
+    <div class="row">
+      <input class="button" type="button" value="Connect" id="buttonConnect"/>
+      <input class="button" type="button" value="Reset" id="buttonReset"/>
+    </div>
   </div>
+
+  <div id="logger"></div>
+
 </div>
 
 <div id="twitch-connection">
   Twitch status:
-  <span class="connection-status"></span>
+  <span class="connection-status error">Disconnected from Twitch!</span>
 </div>
-
 
 </body>
 </html>

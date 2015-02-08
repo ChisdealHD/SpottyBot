@@ -32,10 +32,59 @@ h1 {
   padding: 0 10px 10px 10px;
   border:1px solid rgba(0,0,0,0.25);
   background: white;
+  display: none;
 }
 
 #app p {
   padding-top: 10px;
+}
+
+#connect label {
+  color: #6441a5;
+  width: 100px;
+  display: inline-block;
+  line-height: 30px;
+}
+
+#connect .textbox {
+  margin: 0 0 10px 0;
+  line-height: 30px;
+  padding: 0 7px;
+  height: 30px;
+  font: inherit;
+  letter-spacing: inherit;
+  color: #666;
+  vertical-align: top;
+  border: 1px solid rgba(0,0,0,0.25);
+  background: #fff;
+  width: 220px;
+}
+
+
+#connect .textbox:focus {
+  outline: 0;
+  box-shadow: 0 0 3px 1px rgba(185,155,235,0.75);
+  border: 1px solid rgba(100,65,165,0.75);
+}
+
+.button {
+  background: #6441a5;
+  color: #fff;
+  padding: 0 10px;
+  font-size: 12px;
+  display: inline-block;
+  cursor: pointer;
+  line-height: 30px;
+  height: 30px;
+  margin-right: 7px;
+}
+
+.button:hover {
+  background: #7550ba;
+}
+
+#buttonConnect {
+  margin-left: 103px;
 }
 
 #twitch-connection {
@@ -50,5 +99,5 @@ h1 {
 }
 
 #twitch-connection .error {
-  color: #FF0000; 
+  color: #FF0000;
 }

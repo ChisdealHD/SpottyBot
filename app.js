@@ -7,7 +7,7 @@ var spotify = new nodeSpotifyWebHelper.SpotifyWebHelper();
 
 //External Files
 var tracks = require('./tracks');
-var settings = require('./settings');
+//var settings = require('./settings');
 
 //Global Vars
 var _skipCount = 0;
@@ -15,80 +15,112 @@ var _currentSkipVoters = [];
 var _currentKeepVoters = [];
 var _myNextTrackTimer = 0;
 var _myTracks = tracks.allTracks();
-var _myUsername = settings.botUsername;
-var _myPassword = settings.botAuthToken;
-var _myTwitchChannel = settings.twitchChannels;
+// var _myUsername = settings.botUsername;
+// var _myPassword = settings.botAuthToken;
+// var _myTwitchChannel = settings.twitchChannels;
 var _mySkipCount = settings.skipCount;
 var _varWhatSong = "";
 
 // Creating NEW Twitch IRC Client
-var client = new irc.client({
-  options: {
-    debug: true,
-    debugIgnore: ['ping', 'chat', 'action'],
-    logging: false,
-    tc: 3
-  },
-  identity: {
-    username: _myUsername,
-    password: _myPassword
-  },
-  channels: _myTwitchChannel
-});
+$('#buttonConnect').click(function () {
 
-//Connect to Twitch
-client.connect();
+  var botUsername = $('#botUsername').val();
+  var botAuth = $('#botAuth').val();
+  var channel = $('#channel').val();
 
-//Add listeners for connection.
-client.addListener('connecting', function (address, port) {
-    myLogger("Connecting...");
-    $('#twitch-connection .connection-status').html("<b>Connecting...</b>");
-});
+  if (botUsername === "" || botAuth === "" || channel === "") {
+    alert("Plase fill in your details.")
+  } else {
 
-client.addListener('connected', function (address, port) {
-    myLogger("Connected to <b>#" + _myTwitchChannel + "</b> on Twitch!")
-    myLogger("Now type <b>!adminstart</b> in your Twitch chat room!");
-    $('#twitch-connection .connection-status').html("Connected (#" + _myTwitchChannel + ')').addClass('success');
-});
+    // var clientObj = {
+    //   "botUsername": botUsername,
+    //   "botAuth": botAuth,
+    //   "channel": channel
+    // };
 
-client.addListener('connectfail', function () {
-    myLogger("Connection to Twitch failed!");
-    $('#twitch-connection .connection-status').html("Connection to Twitch failed!").addClass('error');
-});
+    var client = new irc.client({
+      options: {
+        debug: true,
+        debugIgnore: ['ping', 'chat', 'action'],
+        logging: false,
+        tc: 3
+      },
+      identity: {
+        username: botUsername,
+        password: botAuth
+      },
+      channels: channel
+    });
 
-client.addListener('disconnected', function (reason) {
-    myLogger("Disconnected from Twitch!");
-    $('#twitch-connection .connection-status').html("Disconnected from Twitch!").addClass('error');
-});
+    //Connect to Twitch
+    client.connect();
 
-// Add listeners for chat commands.
-client.addListener('chat', function(channel, user, message) {
+    //Add listeners for connection.
+    client.addListener('connecting', function (address, port) {
+      myLogger("Connecting...");
+      $('#twitch-connection .connection-status').html("<b>Connecting...</b>");
+    });
 
-  if (message.indexOf('!song') === 0) {
-    // Get the name of the song which is currently playing
-    whatSong(channel, user, message);
-  }
+    client.addListener('connected', function (address, port) {
 
-  if (message.indexOf('!skip') === 0) {
-    // Skip track
-    skip(channel, user, message);
-  }
+      $('#connect').hide();
+      $('#logger').show();
 
-  if (message.indexOf('!keep') === 0) {
-    // Skip track
-    keep(channel, user, message);
-  }
+      myLogger("Connected to <b>#" + _myTwitchChannel + "</b> on Twitch!")
+      myLogger("Now type <b>!adminstart</b> in your Twitch chat room!");
+      $('#twitch-connection .connection-status').html("Connected (#" + _myTwitchChannel + ')').addClass('success');
+    });
 
-  if (message.indexOf('!adminstart') === 0 && user.special.indexOf('broadcaster') >= 0) {
-    var newTrack = getTrack();
-    play(newTrack);
-    myLogger("<b>Spotify started!</b>");
-  }
+    client.addListener('connectfail', function () {
 
-  if (message.indexOf('!adminskip') === 0 && user.special.indexOf('broadcaster') >= 0) {
-    var newTrack = getTrack();
-    play(newTrack);
-    myLogger("<b>Admin skipped the track!</b>");
+      $('#connect').show();
+      $('#logger').hide();
+
+      myLogger("Connection to Twitch failed!");
+      $('#twitch-connection .connection-status').html("Connection to Twitch failed!").addClass('error');
+    });
+
+    client.addListener('disconnected', function (reason) {
+
+      $('#connect').show();
+      $('#logger').hide();
+
+      myLogger("Disconnected from Twitch!");
+      $('#twitch-connection .connection-status').html("Disconnected from Twitch!").addClass('error');
+    });
+
+    // Add listeners for chat commands.
+    client.addListener('chat', function (channel, user, message) {
+
+      if (message.indexOf('!song') === 0) {
+        // Get the name of the song which is currently playing
+        whatSong(channel, user, message);
+      }
+
+      if (message.indexOf('!skip') === 0) {
+        // Skip track
+        skip(channel, user, message);
+      }
+
+      if (message.indexOf('!keep') === 0) {
+        // Skip track
+        keep(channel, user, message);
+      }
+
+      if (message.indexOf('!adminstart') === 0 && user.special.indexOf('broadcaster') >= 0) {
+        var newTrack = getTrack();
+        play(newTrack);
+        myLogger("<b>Spotify started!</b>");
+      }
+
+      if (message.indexOf('!adminskip') === 0 && user.special.indexOf('broadcaster') >= 0) {
+        var newTrack = getTrack();
+        play(newTrack);
+        myLogger("<b>Admin skipped the track!</b>");
+      }
+
+    });
+
   }
 
 });
@@ -108,7 +140,7 @@ function play(track) {
   _currentKeepVoters = [];
   _skipCount = 0;
 
-  spotify.play(track, function(err, res) {
+  spotify.play(track, function (err, res) {
 
     if (err) {
       return console.error(err);
@@ -126,7 +158,7 @@ function play(track) {
         clearTimeout(_myNextTrackTimer);
         var timeBeforeNextTrack = res.track.length * 1000;
 
-        _myNextTrackTimer = setTimeout(function() {
+        _myNextTrackTimer = setTimeout(function () {
           var newTrack = getTrack();
           play(newTrack);
         }, timeBeforeNextTrack);
@@ -224,5 +256,5 @@ function myLogger(message) {
 }
 
 function capitaliseFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
