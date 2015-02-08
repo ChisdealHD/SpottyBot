@@ -19,6 +19,7 @@ var _myUsername = settings.botUsername;
 var _myPassword = settings.botAuthToken;
 var _myTwitchChannel = settings.twitchChannels;
 var _mySkipCount = settings.skipCount;
+var _varWhatSong = "";
 
 // Creating NEW Twitch IRC Client
 var client = new irc.client({
@@ -38,6 +39,28 @@ var client = new irc.client({
 //Connect to Twitch
 client.connect();
 
+//Add listeners for connection.
+client.addListener('connecting', function (address, port) {
+    myLogger("Connecting...");
+    $('#twitch-connection .connection-status').html("<b>Connecting...</b>");
+});
+
+client.addListener('connected', function (address, port) {
+    myLogger("Connected to <b>#" + _myTwitchChannel + "</b> on Twitch!")
+    myLogger("Now type <b>!adminstart</b> in your Twitch chat room!");
+    $('#twitch-connection .connection-status').html("Connected (#" + _myTwitchChannel + ')').addClass('success');
+});
+
+client.addListener('connectfail', function () {
+    myLogger("Connection to Twitch failed!");
+    $('#twitch-connection .connection-status').html("Connection to Twitch failed!").addClass('error');
+});
+
+client.addListener('disconnected', function (reason) {
+    myLogger("Disconnected from Twitch!");
+    $('#twitch-connection .connection-status').html("Disconnected from Twitch!").addClass('error');
+});
+
 // Add listeners for chat commands.
 client.addListener('chat', function(channel, user, message) {
 
@@ -56,23 +79,22 @@ client.addListener('chat', function(channel, user, message) {
     keep(channel, user, message);
   }
 
-  if (message.indexOf('!start') === 0 && user.special.indexOf('broadcaster') >= 0) {
+  if (message.indexOf('!adminstart') === 0 && user.special.indexOf('broadcaster') >= 0) {
     var newTrack = getTrack();
     play(newTrack);
-    console.info("Spotify started!");
+    myLogger("<b>Spotify started!</b>");
+  }
+
+  if (message.indexOf('!adminskip') === 0 && user.special.indexOf('broadcaster') >= 0) {
+    var newTrack = getTrack();
+    play(newTrack);
+    myLogger("<b>Admin skipped the track!</b>");
   }
 
 });
 
 function whatSong(channel, user, message) {
-  spotify.getStatus(function(err, res) {
-    if (err) {
-      return console.error(err);
-    }
-
-    var message = 'Currently playing: ' + res.track.track_resource.name + ' by ' + res.track.artist_resource.name + ' - ' + res.track.track_resource.location.og;
-    client.say(channel, message);
-  });
+  client.say(channel, _varWhatSong);
 }
 
 function getTrack() {
@@ -94,17 +116,28 @@ function play(track) {
 
     if (res) {
 
-      console.log("Now playing: " + track);
+      if (res.track && res.track.track_resource) {
 
-      clearTimeout(_myNextTrackTimer);
-      var timeBeforeNextTrack = res.track.length * 1000;
+        var message = 'Now playing: ' + res.track.track_resource.name + ' by ' + res.track.artist_resource.name + ' ' + res.track.track_resource.location.og;
 
-      _myNextTrackTimer = setTimeout(function() {
+        _varWhatSong = message;
+        myLogger(message);
+
+        clearTimeout(_myNextTrackTimer);
+        var timeBeforeNextTrack = res.track.length * 1000;
+
+        _myNextTrackTimer = setTimeout(function() {
+          var newTrack = getTrack();
+          play(newTrack);
+        }, timeBeforeNextTrack);
+
+      } else {
+        //Something went wrong, try again!
         var newTrack = getTrack();
-
         play(newTrack);
+        myLogger("<b>Something went wrong, trying another track!</b>");
 
-      }, timeBeforeNextTrack);
+      }
 
     }
 
@@ -114,17 +147,18 @@ function play(track) {
 
 function skip(channel, user, message) {
 
-  var voter = user.username;
+  var voter = capitaliseFirstLetter(user.username);
 
   if (_currentSkipVoters.indexOf(voter) !== -1) {
 
-    var message = user.username + " you can only vote once per song!";
+    var message = voter + " you can only vote once per song!";
     client.say(channel, message);
 
   } else {
 
     _currentSkipVoters.push(voter);
-    console.log(voter + " is voting to skip this track!");
+    myLogger("<b>" + voter + "</b> is voting to skip this track!");
+
     var index = _currentKeepVoters.indexOf(voter);
     if (index > -1) {
       _currentKeepVoters.splice(index, 1);
@@ -136,7 +170,7 @@ function skip(channel, user, message) {
 
       var message = _skipCount + " / " + _mySkipCount + " votes needed to skip this track! - Track Skipped!";
       client.say(channel, message);
-      console.log("Track Skipped!");
+      myLogger("<b>Track Skipped!</b>");
 
       var track = getTrack();
 
@@ -145,7 +179,7 @@ function skip(channel, user, message) {
     } else {
 
       _skipCount = _skipCount + 1;
-      var message = user.username + " is voting to skip this track! " + _skipCount + " / " + _mySkipCount + " votes needed to skip this track!";
+      var message = voter + " is voting to skip this track! " + _skipCount + " / " + _mySkipCount + " votes needed to skip this track!";
       client.say(channel, message);
 
     }
@@ -155,17 +189,17 @@ function skip(channel, user, message) {
 
 function keep(channel, user, message) {
 
-  var voter = user.username;
+  var voter = capitaliseFirstLetter(user.username);
 
   if (_currentKeepVoters.indexOf(voter) !== -1) {
 
-    var message = user.username + " you can only vote once per song!";
+    var message = voter + " you can only vote once per song!";
     client.say(channel, message);
 
   } else {
 
     _currentKeepVoters.push(voter);
-    console.log(voter + " is voting to keep this track!");
+    myLogger("<b>" + voter + "</b> is voting to keep this track!");
     var index = _currentSkipVoters.indexOf(voter);
     if (index > -1) {
       _currentSkipVoters.splice(index, 1);
@@ -177,8 +211,18 @@ function keep(channel, user, message) {
       _skipCount = 0;
     }
 
-    var message = user.username + " is voting to keep this track! Skip votes is now " + _skipCount + " / " + _mySkipCount + " booya!";
+    var message = voter + " is voting to keep this track! Skip votes is now " + _skipCount + " / " + _mySkipCount + " booya!";
     client.say(channel, message);
 
   }
+}
+
+function myLogger(message) {
+  console.log(message);
+  $("#logger").append("<p>" + message + "</p>");
+  $("#logger").scrollTop($("#logger")[0].scrollHeight);
+}
+
+function capitaliseFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
