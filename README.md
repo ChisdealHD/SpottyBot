@@ -58,6 +58,8 @@ Coming Soon!
 ## Known Issues
 If the bot try's to play a music track which is not allowed in the given users country or if an advert plays the bot will crash. The bot can be restarted by typing !start in the Twitch chat. I am working to issolate and fix this issue. <3
 
-## V2 is in the making with GUI - Check back soon! (Sunday, February 8, 2015)
+## V2 is in the making with a proper interface
+
+ Check back soon! (Sunday, February 8, 2015)
 
 ![SpottyBot v2](http://i.imgur.com/8BwkgD3.png)
