@@ -2,51 +2,48 @@
 
 ## SpottyBot - A Twitch Spotify Bot
 
-SpottyBot is a Twitch IRC bot which plays only TOS compliment music via your desktop Spotify application!  
-(Works on Windows and Mac).
+SpottyBot is a Twitch IRC bot for Windows and Mac which plays only TOS compliment music via your desktop Spotify application!  
 
-Recently Twitch announced a list of tracks made available to Twitch broadcasters to use freely in Twitch live and recorded videos.
+Recently Twitch announced a list of tracks made available to Twitch broadcasters to use freely in Twitch live and recorded videos using SpottyBot means your VODS should no longer get muted and you can appeal them if they do!
 
-Users in your Twitch chat room can now control the music playing on your Twitch stream and as a streamer you can be sure your not breaking any laws or the Twitch terms of service!
+Plus! Users in your Twitch chat room can now control the music playing on your Twitch stream and as a streamer you can be sure you are not breaking any laws or the Twitch terms of service!
 
-This small node app allows users in your chat room to control the music via a voting system and discover the currently playing music track!
+SpottyBot allows users in your chat room to control the music via a voting system and discover the currently playing music track! Users can type three commands: !skip, !keep and !song
 
-The current app list is over 500 songs! [Twitch Music](http://music.twitch.tv)
+The current app song list is over 500 songs! [Twitch Music](http://music.twitch.tv)
+
+## This is SpottyBot
+
+![SpottyBot v2](http://i.imgur.com/8BwkgD3.png)
 
 ## Usage
 
-You will need a few things before you start:
+**IMPORTANT! You will need a few things before you start:**
 
 You need to have a Spotify account. [Create Spotify Account](https://www.spotify.com/signup/)  
 You need to launch Spotify on your streaming desktop or laptop computer. [Install Spotify](https://www.spotify.com/download/)  
-You need to have node.js installed. [Install Node](http://nodejs.org/)  
-Download this SpottyBot application. [Download SpottyBot](https://github.com/Fasani/SpottyBot/archive/master.zip)  
 You need a spare or new twitch bot account.  
+You need to download SpottyBot for your OS.  
+
+## Download SpottyBot
+Windows 32Bit - https://github.com/Fasani/SpottyBot/blob/master-v1/_build/downloads/win32.zip?raw=true
+Windows 64Bit - https://github.com/Fasani/SpottyBot/blob/master-v1/_build/downloads/win64.zip?raw=true
+Mac OSX32 - https://github.com/Fasani/SpottyBot/blob/master-v1/_build/downloads/osx32.zip?raw=true
+Mac OSX64 - https://github.com/Fasani/SpottyBot/blob/master-v1/_build/downloads/osx64.zip?raw=true
 
 ## Start SpottyBot
 
 1. You need to create a new twitch account for your SpottyBot, call it something like TimsJukeBox or FMDMusicBot.
-2. You need to get an oauth token for the bot to connect to Twitch. [Create oauth token](http://twitchapps.com/tmi/)
-3. Edit the `settings.js` file
-4. Open a node console at the folder location and type `node app.js`.
-
-settings.js
-```javascript
-module.exports = {
-  botUsername: 'YourBotsUserName',
-  botAuthToken: 'oauth:123456789123456789',
-  twitchChannels: ['YourTwitchChannel'],
-  skipCount: 5
-};
-```
+2. You need to get an oauth token for the bot to connect it to Twitch. [Create oauth token](http://twitchapps.com/tmi/)
+3. Make sure the Spotify Desktop app is open on your streaming PC.
+4. Launch SpottyBot and fill in your details.
 
 ## Start the app playing music!
-Type !start in your Twitch chat room.  
-This command can also be used to skip a track.  
-This is a Broadcaster only command.
+Type !adminstart in your Twitch chat room. This is a Broadcaster only command.  
 
 ## Chat client commands
-!start - Only the broadcaster can use this. Can be used to skip a track also.  
+!adminstart - Only the broadcaster can use this.  
+!adminskip - Admin can skip the track.  
 !song - List the current song playing.  
 !skip - Votes to skip the track.  
 !keep - Votes to keep the track.  
@@ -54,12 +51,3 @@ This is a Broadcaster only command.
 ## FAQ
 
 Coming Soon!
-
-## Known Issues
-If the bot try's to play a music track which is not allowed in the given users country or if an advert plays the bot will crash. The bot can be restarted by typing !start in the Twitch chat. I am working to issolate and fix this issue. <3
-
-## V2 is in the making with a proper interface
-
- Check back soon! (Sunday, February 8, 2015)
-
-![SpottyBot v2](http://i.imgur.com/8BwkgD3.png)

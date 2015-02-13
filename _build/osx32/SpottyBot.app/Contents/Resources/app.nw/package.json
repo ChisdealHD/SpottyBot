@@ -1,0 +1,20 @@
+{
+  "name": "SpottyBot",
+  "version": "1.0.0",
+  "description": "A bot to allow user control of Spotify from a Twitch chat room.",
+  "author": "michaelfasani@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "node-spotify-webhelper": "0.0.3",
+    "node-webkit-builder": "^1.0.8",
+    "twitch-irc": "1.1.0"
+  },
+  "window": {
+    "toolbar": false,
+    "resizable": false,
+    "width": 520,
+    "height": 320,
+    "icon": "assets/icons/ico.png"
+  },
+  "main": "index.html"
+}
