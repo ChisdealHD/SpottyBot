@@ -1,7 +1,7 @@
 {
   "name": "SpottyBot",
-  "version": "1.0.0",
-  "description": "A bot to allow user control of Spotify from a Twitch chat room.",
+  "version": "2.0.0",
+  "description": "SpottyBot is a Twitch IRC bot which plays only TOS compliment music via your desktop Spotify application!",
   "author": "michaelfasani@gmail.com",
   "license": "MIT",
   "dependencies": {
