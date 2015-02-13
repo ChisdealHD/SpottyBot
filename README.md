@@ -26,10 +26,10 @@ You need a spare or new twitch bot account.
 You need to download SpottyBot for your OS.  
 
 ## Download SpottyBot
-Windows 32Bit - https://github.com/Fasani/SpottyBot/blob/master-v1/_build/downloads/win32.zip?raw=true  
-Windows 64Bit - https://github.com/Fasani/SpottyBot/blob/master-v1/_build/downloads/win64.zip?raw=true  
-Mac OSX32 - https://github.com/Fasani/SpottyBot/blob/master-v1/_build/downloads/osx32.zip?raw=true  
-Mac OSX64 - https://github.com/Fasani/SpottyBot/blob/master-v1/_build/downloads/osx64.zip?raw=true  
+Windows 32Bit https://github.com/Fasani/SpottyBot/blob/master/_build/downloads/win32.zip?raw=true  
+Windows 64Bit https://github.com/Fasani/SpottyBot/blob/master/_build/downloads/win64.zip?raw=true  
+Mac OSX32 https://github.com/Fasani/SpottyBot/blob/master/_build/downloads/osx32.zip?raw=true  
+Mac OSX64 https://github.com/Fasani/SpottyBot/blob/master/_build/downloads/osx64.zip?raw=true  
 
 ## Start SpottyBot
 
