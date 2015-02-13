@@ -16,7 +16,6 @@ The current app song list is over 500 songs! [Twitch Music](http://music.twitch.
 
 ![SpottyBot v2](http://i.imgur.com/8BwkgD3.png)
 
-## Register for updates
 Visit: http://www.spottybot.com/
 
 ## Usage
