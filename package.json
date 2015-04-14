@@ -1,13 +1,16 @@
 {
   "name": "SpottyBot",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "SpottyBot is a Twitch IRC bot which plays only TOS compliment music via your desktop Spotify application!",
   "author": "michaelfasani@gmail.com",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fasani/spottybot.git"
+  },
   "dependencies": {
     "node-spotify-webhelper": "0.0.3",
-    "node-webkit-builder": "^1.0.8",
-    "twitch-irc": "1.1.0"
+    "twitch-irc": "^1.2.6"
   },
   "window": {
     "toolbar": false,
@@ -16,5 +19,8 @@
     "height": 320,
     "icon": "assets/icons/ico.png"
   },
-  "main": "index.html"
+  "main": "index.html",
+  "devDependencies": {
+    "node-webkit-builder": "^1.0.11"
+  }
 }

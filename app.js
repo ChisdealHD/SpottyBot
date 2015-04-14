@@ -26,7 +26,7 @@ $(document).ready(function() {
   var _varWhatSong = "";
 
   // Creating NEW Twitch IRC Client
-  $('body').on("click", "#buttonReset", function() {
+  $('body').one("click", "#buttonReset", function() {
     $('#botUsername').val("");
     $('#botAuth').val("");
     $('#channel').val("");
@@ -38,7 +38,7 @@ $(document).ready(function() {
     localStorage.votes = "";
   });
 
-  $('body').on("click", "#buttonConnect", function() {
+  $('body').one("click", "#buttonConnect", function() {
 
     var botUsername = $('#botUsername').val();
     var botAuth = $('#botAuth').val();
@@ -58,11 +58,11 @@ $(document).ready(function() {
 
       var client = new irc.client({
         options: {
-          debug: true,
-          debugIgnore: ['ping', 'chat', 'action'],
-          logging: false,
-          tc: 3
+          debug: false,
+          debugIgnore: ['ping', 'chat', 'action']
         },
+        preferredServer: "irc.twitch.tv",
+        preferredPort: "6667",
         identity: {
           username: botUsername,
           password: botAuth
@@ -89,21 +89,15 @@ $(document).ready(function() {
         $('#twitch-connection .connection-status').html("Connected (#" + channel + ')').addClass('success');
       });
 
-      client.addListener('connectfail', function() {
+      client.addListener('connectfail', function(reason) {
 
-        $('#connect').show();
-        $('#logger').hide();
-
-        myLogger("Connection to Twitch failed!");
+        myLogger("Connection to Twitch failed! " + reason);
         $('#twitch-connection .connection-status').html("Connection to Twitch failed!").addClass('error');
       });
 
       client.addListener('disconnected', function(reason) {
 
-        $('#connect').show();
-        $('#logger').hide();
-
-        myLogger("Disconnected from Twitch!");
+        myLogger("Disconnected from Twitch! " + reason);
         $('#twitch-connection .connection-status').html("Disconnected from Twitch!").addClass('error');
       });
 
