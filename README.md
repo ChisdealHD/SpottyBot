@@ -33,7 +33,7 @@ You need to download SpottyBot for your OS.
 [Windows 32Bit](https://github.com/Fasani/SpottyBot/blob/master/_build/win32.zip?raw=true)  
 [Windows 64Bit](https://github.com/Fasani/SpottyBot/blob/master/_build/win64.zip?raw=true)
 
- ## For MAC Download the entire folder and look in the build folder
+## For MAC Download the entire folder and look in the build folder
 [Mac OSX32 - https://github.com/Fasani/SpottyBot/blob/master/_build/](https://github.com/Fasani/SpottyBot/blob/master/_build/)  
 [Mac OSX64 - https://github.com/Fasani/SpottyBot/blob/master/_build/](https://github.com/Fasani/SpottyBot/blob/master/_build/)  
 
