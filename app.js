@@ -9,7 +9,6 @@ $(document).ready(function() {
   process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
   //Libs
-  var irc = require('twitch-irc');
   var nodeSpotifyWebHelper = require('node-spotify-webhelper');
   var spotify = new nodeSpotifyWebHelper.SpotifyWebHelper();
 
@@ -42,7 +41,7 @@ $(document).ready(function() {
 
     var botUsername = $('#botUsername').val();
     var botAuth = $('#botAuth').val();
-    var channel = $('#channel').val();
+    var channel = $('#channel').val().toLowerCase();
     var votes = $('#votes').val();
 
     _mySkipCount = votes;
@@ -55,29 +54,22 @@ $(document).ready(function() {
     if (botUsername === "" || botAuth === "" || channel === "" || votes === "") {
       alert("Plase fill in all details.")
     } else {
-
-      var client = new irc.client({
+      var options = {
         options: {
-          debug: false,
-          debugIgnore: ['ping', 'chat', 'action']
+          debug: true
         },
-        preferredServer: "irc.twitch.tv",
-        preferredPort: "6667",
+        connection: {
+          random: "chat",
+          reconnect: true
+        },
         identity: {
           username: botUsername,
           password: botAuth
         },
         channels: [channel]
-      });
+      };
 
-      //Connect to Twitch
-      client.connect();
-
-      //Add listeners for connection.
-      client.addListener('connecting', function(address, port) {
-        myLogger("Connecting...");
-        $('#twitch-connection .connection-status').html("<b>Connecting...</b>").removeClass('error').removeClass('success');
-      });
+      var client = new irc.client(options);
 
       client.addListener('connected', function(address, port) {
 
@@ -86,19 +78,22 @@ $(document).ready(function() {
 
         myLogger("Connected to <b>#" + channel + "</b> on Twitch!")
         myLogger("Now type <b>!adminstart</b> in your Twitch chat room!");
-        $('#twitch-connection .connection-status').html("Connected (#" + channel + ')').addClass('success');
+        myLogger("Using the offical Twitch Music Library! The music listed in the Twitch Music Library is safe to use for both LIVE broadcasts and VOD playback.");
+        myLogger("https://play.spotify.com/user/twitchfm/playlist/1fm7mdOoADMy0508dlNbGE");
+
+        $('#twitch-connection .connection-status').html("Connected (#" + channel + ')').removeClass('error').addClass('success');
       });
 
       client.addListener('connectfail', function(reason) {
 
         myLogger("Connection to Twitch failed! " + reason);
-        $('#twitch-connection .connection-status').html("Connection to Twitch failed!").addClass('error');
+        $('#twitch-connection .connection-status').html("Connection to Twitch failed!").removeClass('success').addClass('error');
       });
 
       client.addListener('disconnected', function(reason) {
 
         myLogger("Disconnected from Twitch! " + reason);
-        $('#twitch-connection .connection-status').html("Disconnected from Twitch!").addClass('error');
+        $('#twitch-connection .connection-status').html("Disconnected from Twitch!").removeClass('success').addClass('error');
       });
 
       // Add listeners for chat commands.
@@ -119,19 +114,22 @@ $(document).ready(function() {
           keep(channel, user, message);
         }
 
-        if (message.indexOf('!adminstart') === 0 && user.special.indexOf('broadcaster') >= 0) {
+        if (message.indexOf('!adminstart') === 0 && ('#' + user.username) === channel) {
           var newTrack = getTrack();
           play(newTrack);
           myLogger("<b>Spotify started!</b>");
         }
 
-        if (message.indexOf('!adminskip') === 0 && user.special.indexOf('broadcaster') >= 0) {
+        if (message.indexOf('!adminskip') === 0 && ('#' + user.username) === channel) {
           var newTrack = getTrack();
           play(newTrack);
           myLogger("<b>Admin skipped the track!</b>");
         }
 
       });
+
+      //Connect to Twitch
+      client.connect();
 
     }
 

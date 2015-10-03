@@ -2,6 +2,8 @@
 
 ## SpottyBot - A Twitch Spotify Bot
 
+## Tracklist updated: 03.10.2015 - Bugs Fixed!
+
 SpottyBot is a Twitch IRC bot for Windows and Mac which plays only TOS compliment music via your desktop Spotify application!  
 
 Recently Twitch announced a list of tracks made available to Twitch broadcasters to use freely in Twitch live and recorded videos using SpottyBot means your VODS should no longer get muted and you can appeal them if they do!
@@ -28,10 +30,12 @@ You need a spare or new twitch bot account.
 You need to download SpottyBot for your OS.  
 
 ## Download SpottyBot
-[Windows 32Bit](https://github.com/Fasani/SpottyBot/blob/master/_build/downloads/win32.zip?raw=true)  
-[Windows 64Bit](https://github.com/Fasani/SpottyBot/blob/master/_build/downloads/win64.zip?raw=true)  
-[Mac OSX32](https://github.com/Fasani/SpottyBot/blob/master/_build/downloads/osx32.zip?raw=true)  
-[Mac OSX64](https://github.com/Fasani/SpottyBot/blob/master/_build/downloads/osx64.zip?raw=true)  
+[Windows 32Bit](https://github.com/Fasani/SpottyBot/blob/master/_build/win32.zip?raw=true)  
+[Windows 64Bit](https://github.com/Fasani/SpottyBot/blob/master/_build/win64.zip?raw=true)
+
+ ## For MAC Download the entire folder and look in the build folder
+[Mac OSX32 - https://github.com/Fasani/SpottyBot/blob/master/_build/](https://github.com/Fasani/SpottyBot/blob/master/_build/)  
+[Mac OSX64 - https://github.com/Fasani/SpottyBot/blob/master/_build/](https://github.com/Fasani/SpottyBot/blob/master/_build/)  
 
 ## Start SpottyBot
 
